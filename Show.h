@@ -4,6 +4,7 @@
 
 #include "Type.h"
 
+void ShowInit(void);
 
 #endif
 

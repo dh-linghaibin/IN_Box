@@ -22,6 +22,10 @@
         <ColumnWidth2>486</ColumnWidth2>
         <ColumnWidth3>121</ColumnWidth3>
       </Build>
+      <Debug-Log>
+        <ColumnWidth0>23</ColumnWidth0>
+        <ColumnWidth1>1170</ColumnWidth1>
+      </Debug-Log>
     </Static>
     <Windows>
       <Wnd0>
@@ -33,6 +37,9 @@
             <Session>
               <NodeDict>
                 <ExpandedNode>IN_Box</ExpandedNode>
+                <ExpandedNode>IN_Box/Bluetooth.c</ExpandedNode>
+                <ExpandedNode>IN_Box/Prompt.c</ExpandedNode>
+                <ExpandedNode>IN_Box/UsbOut.c</ExpandedNode>
               </NodeDict>
             </Session>
           </Tab>
@@ -45,6 +52,12 @@
             <Identity>TabID-6475-22725</Identity>
             <TabName>Build</TabName>
             <Factory>Build</Factory>
+            <Session/>
+          </Tab>
+          <Tab>
+            <Identity>TabID-29775-20428</Identity>
+            <TabName>Debug Log</TabName>
+            <Factory>Debug-Log</Factory>
             <Session/>
           </Tab>
         </Tabs>
@@ -85,9 +98,9 @@
           <SelStart>0</SelStart>
           <SelEnd>0</SelEnd>
           <XPos2>0</XPos2>
-          <YPos2>57</YPos2>
-          <SelStart2>88</SelStart2>
-          <SelEnd2>88</SelEnd2>
+          <YPos2>12</YPos2>
+          <SelStart2>90</SelStart2>
+          <SelEnd2>110</SelEnd2>
         </Tab>
         <Tab>
           <Factory>TextEditor</Factory>
@@ -98,8 +111,8 @@
           <SelEnd>0</SelEnd>
           <XPos2>0</XPos2>
           <YPos2>0</YPos2>
-          <SelStart2>52</SelStart2>
-          <SelEnd2>52</SelEnd2>
+          <SelStart2>76</SelStart2>
+          <SelEnd2>76</SelEnd2>
         </Tab>
         <Tab>
           <Factory>TextEditor</Factory>
@@ -122,8 +135,8 @@
           <SelEnd>0</SelEnd>
           <XPos2>0</XPos2>
           <YPos2>0</YPos2>
-          <SelStart2>63</SelStart2>
-          <SelEnd2>63</SelEnd2>
+          <SelStart2>73</SelStart2>
+          <SelEnd2>86</SelEnd2>
         </Tab>
         <Tab>
           <Factory>TextEditor</Factory>
@@ -134,8 +147,8 @@
           <SelEnd>0</SelEnd>
           <XPos2>0</XPos2>
           <YPos2>0</YPos2>
-          <SelStart2>124</SelStart2>
-          <SelEnd2>189</SelEnd2>
+          <SelStart2>100</SelStart2>
+          <SelEnd2>122</SelEnd2>
         </Tab>
         <Tab>
           <Factory>TextEditor</Factory>
@@ -158,8 +171,8 @@
           <SelEnd>0</SelEnd>
           <XPos2>0</XPos2>
           <YPos2>0</YPos2>
-          <SelStart2>121</SelStart2>
-          <SelEnd2>178</SelEnd2>
+          <SelStart2>2</SelStart2>
+          <SelEnd2>21</SelEnd2>
         </Tab>
         <Tab>
           <Factory>TextEditor</Factory>
@@ -170,8 +183,8 @@
           <SelEnd>0</SelEnd>
           <XPos2>0</XPos2>
           <YPos2>0</YPos2>
-          <SelStart2>56</SelStart2>
-          <SelEnd2>56</SelEnd2>
+          <SelStart2>68</SelStart2>
+          <SelEnd2>78</SelEnd2>
         </Tab>
         <Tab>
           <Factory>TextEditor</Factory>
@@ -206,8 +219,8 @@
           <SelEnd>0</SelEnd>
           <XPos2>0</XPos2>
           <YPos2>0</YPos2>
-          <SelStart2>120</SelStart2>
-          <SelEnd2>148</SelEnd2>
+          <SelStart2>6</SelStart2>
+          <SelEnd2>31</SelEnd2>
         </Tab>
         <Tab>
           <Factory>TextEditor</Factory>
@@ -218,8 +231,8 @@
           <SelEnd>0</SelEnd>
           <XPos2>0</XPos2>
           <YPos2>0</YPos2>
-          <SelStart2>110</SelStart2>
-          <SelEnd2>110</SelEnd2>
+          <SelStart2>88</SelStart2>
+          <SelEnd2>104</SelEnd2>
         </Tab>
         <Tab>
           <Factory>TextEditor</Factory>
@@ -230,10 +243,34 @@
           <SelEnd>0</SelEnd>
           <XPos2>0</XPos2>
           <YPos2>0</YPos2>
-          <SelStart2>76</SelStart2>
-          <SelEnd2>76</SelEnd2>
+          <SelStart2>288</SelStart2>
+          <SelEnd2>304</SelEnd2>
         </Tab>
-        <ActiveTab>14</ActiveTab>
+        <Tab>
+          <Factory>TextEditor</Factory>
+          <Filename>$WS_DIR$\Prompt.c</Filename>
+          <XPos>0</XPos>
+          <YPos>0</YPos>
+          <SelStart>0</SelStart>
+          <SelEnd>0</SelEnd>
+          <XPos2>0</XPos2>
+          <YPos2>0</YPos2>
+          <SelStart2>17</SelStart2>
+          <SelEnd2>17</SelEnd2>
+        </Tab>
+        <Tab>
+          <Factory>TextEditor</Factory>
+          <Filename>$WS_DIR$\Prompt.h</Filename>
+          <XPos>0</XPos>
+          <YPos>0</YPos>
+          <SelStart>0</SelStart>
+          <SelEnd>0</SelEnd>
+          <XPos2>0</XPos2>
+          <YPos2>0</YPos2>
+          <SelStart2>58</SelStart2>
+          <SelEnd2>58</SelEnd2>
+        </Tab>
+        <ActiveTab>16</ActiveTab>
       </Pane>
       <ActivePane>0</ActivePane>
       <Sizes>

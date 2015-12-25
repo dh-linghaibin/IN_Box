@@ -4,7 +4,7 @@
 
 #include "Type.h"
 
-
+void BluetoothInit(void) ;
 
 
 #endif
