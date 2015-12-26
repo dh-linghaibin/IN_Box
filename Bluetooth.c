@@ -117,21 +117,27 @@ u8 BluetoothGetFlag(void) {
  @discussion 
  @param   
  */
+void BluetoothClearFlag(void) {
+    blue_rx_flag = 0x00;
+}
+/*!
+ @method     
+ @abstract   
+ @discussion 
+ @param   
+ */
 u8 BluetoothCheck(void)
-{   /*
-	volatile u16 add_data = 0x00;
-	u8 i;
-	for(i = 1;i < 9;i++)
-	{
-		add_data += blue_m.rx[i];
+{  
+	u16 add_data = 0x00;
+	u8 count_i;
+	for(count_i = 1;count_i < 9;count_i++) {
+		add_data += blue_rx_data[count_i];
 	}
-	if(blue_m.rx[10] == (add_data&0x00ff))
-	{
-		if(blue_m.rx[11] == (add_data >> 8))
-		{
+	if(blue_rx_data[10] == (add_data&0x00ff)) {
+		if(blue_rx_data[11] == (add_data >> 8)) {
 			return 0x80;
 		}
-	}*/
+	}
 	return 0x00;
 }
 

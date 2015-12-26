@@ -5,4 +5,6 @@
 
 #include "Type.h"
 
+void PromptInit(void);
+
 #endif

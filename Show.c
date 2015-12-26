@@ -94,4 +94,7 @@ void ShowInit(void) {
 	
 	TIM3_CR1 = 0x04;
 	TIM3_CR1 |= BIT(0);              //计数器使能，开始计数
+    
+    
+    
 }

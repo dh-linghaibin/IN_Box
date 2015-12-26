@@ -22,6 +22,10 @@ void CurrentsamplInit(void) {
     PE_CR1_C17 = 0;
     PE_CR2_C27 = 0;
     
+    PE_DDR_DDR5= 1;//EN
+    PE_CR1_C15 = 1;
+    PE_CR2_C25 = 1;
+    
     ADC_CSR &= ~BIT(6);
 	ADC_CSR &= ~BIT(4);
 	ADC_CR1 |= BIT(1);

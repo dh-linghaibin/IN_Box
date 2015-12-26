@@ -1578,6 +1578,9 @@
     <name>$PROJ_DIR$\Bluetooth.c</name>
   </file>
   <file>
+    <name>$PROJ_DIR$\Com.c</name>
+  </file>
+  <file>
     <name>$PROJ_DIR$\Currentsampl.c</name>
   </file>
   <file>
@@ -1597,6 +1600,9 @@
   </file>
   <file>
     <name>$PROJ_DIR$\Sys.c</name>
+  </file>
+  <file>
+    <name>$PROJ_DIR$\Timer.c</name>
   </file>
   <file>
     <name>$PROJ_DIR$\UsbOut.c</name>
