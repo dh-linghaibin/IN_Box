@@ -7,5 +7,7 @@
 
 void UsboutInit(void);
 
+void UsboutSet(u8 chx,u8 data);
+
 #endif
 

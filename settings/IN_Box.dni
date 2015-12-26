@@ -36,28 +36,27 @@ ActionState=1
 Enabled=0
 ShowSource=1
 [DebugChecksum]
-Checksum=1464633603
+Checksum=286608829
 [CallStack]
 ShowArgs=0
 [Disassembly]
 MixedMode=1
 [watch_formats]
 Fmt0={W}0:count_sec	3	0
+[TermIOLog]
+LoggingEnabled=_ 0
+LogFile=_ ""
 [DataSample]
 LogEnabled=0
 GraphEnabled=0
 ShowTimeLog=1
 ShowTimeSum=1
 [Breakpoints]
-Bp0=_ "STD_CODE" "{$PROJ_DIR$\Timer.c}.27.9" 1 0 0 0 "" 0 ""
-Count=1
+Count=0
 [Log file]
 LoggingEnabled=_ 0
 LogFile=_ ""
 Category=_ 0
-[TermIOLog]
-LoggingEnabled=_ 0
-LogFile=_ ""
 [Aliases]
 Count=0
 SuppressDialog=0

@@ -29,3 +29,21 @@ void UsboutInit(void) {
     PA_CR2_C23 = 1;
 }
 
+void UsboutSet(u8 chx,u8 data) {
+	if(chx == 0x00) {
+		TIM1_CCR1L = data; 
+	}
+	if(chx == 0x01) {
+		TIM1_CCR2L = data;  
+	}
+	if(chx == 0x03) {
+		TIM1_CCR3L = data; 
+	}
+	if(chx == 0x04) {
+		TIM1_CCR4L = data; 
+	}
+	if(chx == 0x05) {
+		TIM2_CCR3L = data;      
+	}
+}
+    

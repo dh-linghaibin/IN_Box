@@ -95,6 +95,14 @@ void ShowInit(void) {
 	TIM3_CR1 = 0x04;
 	TIM3_CR1 |= BIT(0);              //计数器使能，开始计数
     
-    
-    
 }
+
+void ShowRgbSed(u8 r, u8 g, u8 b) {
+    TIM2_CCR2H = 0;
+	TIM2_CCR2L = r;
+	TIM3_CCR1H = 0;
+	TIM3_CCR1L = g;
+	TIM3_CCR2H = 0;
+	TIM3_CCR2L = b;
+}
+

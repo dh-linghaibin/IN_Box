@@ -5,6 +5,7 @@
 #include "Type.h"
 
 void ShowInit(void);
+void ShowRgbSed(u8 r, u8 g, u8 b);
 
 #endif
 
