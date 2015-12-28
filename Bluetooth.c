@@ -35,8 +35,8 @@ void BluetoothInit(void) {
     UART2_CR1=0x00;
     UART2_CR2=0x00;
     UART2_CR3=0x00; 
-    UART2_BRR2=0x0a;//02
-    UART2_BRR1=0x08;//68
+    UART2_BRR2=0x02;//02 0a
+    UART2_BRR1=0x68;//68 08
     UART2_CR2=0x2c;//允许接收，发送，开接收中断
     //bule_en = 0;
 }
@@ -141,6 +141,26 @@ u8 BluetoothCheck(void)
 	return 0x00;
 }
 
+static u8 blue_start = 0;
+static u8 blue_add = 0;
+
+void BluetoothTimeServive(void) {
+    static u16 count = 0;
+    if( (blue_start == 0x80)||(blue_add > 0) )
+    {
+        if(count < 5000) {
+            count++;
+        } else {
+            count = 0;
+            blue_start = 0x00;
+            blue_add = 0x00;
+        }
+        
+    } else {
+        count = 0;
+    }
+}
+
 #pragma vector=0x16
 __interrupt void UART2_TX_IRQHandler(void)
 {
@@ -149,8 +169,6 @@ __interrupt void UART2_TX_IRQHandler(void)
 #pragma vector=0x17
 __interrupt void UART2_RX_IRQHandler(void)
 {
-    static u8 blue_start = 0;
-    static u8 blue_add = 0;
     u8 data_rx;
     data_rx = UART2_DR;
     while((UART2_SR & 0x80) == 0x00);// 等待数据的传送  

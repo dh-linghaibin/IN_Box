@@ -15,6 +15,8 @@ void BluetoothClearFlag(void);
 u8 BluetoothGetDataRx(u8 num);
 u8 BluetoothCheck(void);
 
+void BluetoothTimeServive(void);
+
 #endif
 
 

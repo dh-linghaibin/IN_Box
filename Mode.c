@@ -43,7 +43,6 @@ void ModeInit(void) {
         for(read_i = 0;read_i < 24;read_i++) {
             mode_led_rgb[read_i] = EepromRead(30+read_i);
         }
-        EepromWrite(54,0);
         mode_rgb_mode = EepromRead(54);
         mode_reg_flag = EepromRead(55);
         for(read_i = 0;read_i < 5;read_i++) {
@@ -60,17 +59,32 @@ void ModeInit(void) {
     }
 }
 
-static u8 ModeCheck(u8 cmd) {
+static u8 ModeCheck(u8 cmd,u8 data) {
     u8 mode_data = 0;
+    u8 bit = 0;
+    switch (data) {
+        case 0x01:
+            bit = 0;
+        break;
+        case 0x02:
+            bit = 1;
+        break;
+        case 0x04:
+            bit = 2;
+        break;
+        case 0x08:
+            bit = 3;
+        break;
+    }
     switch(cmd) {
         case 0:
-            mode_data = mode_devic_flag[cmd];
+            mode_data = mode_devic_flag[bit];
         break;
         case 1:
-            mode_data = mode_led_flag[cmd];
+            mode_data = mode_led_flag[bit];
         break;
         case 2:
-            mode_data = mode_photo_flag[cmd];
+            mode_data = mode_photo_flag[bit];
         break;
     }
     return mode_data;
@@ -88,8 +102,8 @@ static void ModeSet(u8 mode, u8 data) {
             UsboutSet(data,mode_out_pwm[data]);
         break;
         case 1:
-            mode_rgb_mode = data;
-            EepromWrite(55,mode_rgb_mode);
+            mode_rgb_mode = data-1;
+            EepromWrite(54,mode_rgb_mode);
         break;
         case 2:
             switch(data) {
@@ -173,10 +187,47 @@ void ModeShowBreath(void) {
             }
         }
     } else if(mode_rgb_mode == 1) {   
-        
+        if(count > 65530) {
+            count  = 0;
+            if(val > 0) {
+                val = 0x00;
+                ShowRgbSed(mode_led_rgb[mode_reg_flag*3],
+                           mode_led_rgb[mode_reg_flag*3+1],
+                           mode_led_rgb[mode_reg_flag*3+2]);
+            } else {
+                val = 0xff;
+                ShowRgbSed(0x00,0x00,0x00);
+            }
+        }
     } else if(mode_rgb_mode == 2) {
+         if(count > 30000) {
+            count  = 0;
+            if(val > 0) {
+                val = 0x00;
+                ShowRgbSed(mode_led_rgb[mode_reg_flag*3],
+                           mode_led_rgb[mode_reg_flag*3+1],
+                           mode_led_rgb[mode_reg_flag*3+2]);
+            } else {
+                val = 0xff;
+                ShowRgbSed(0x00,0x00,0x00);
+            }
+        }
+    } else if(mode_rgb_mode == 3) {
+        if(val == 0x55) {
         
-    } else {
+        } else {
+            val = 0x55;
+            ShowRgbSed(mode_led_rgb[mode_reg_flag*3],
+                   mode_led_rgb[mode_reg_flag*3+1],
+                   mode_led_rgb[mode_reg_flag*3+2]);
+        }
+    } else if(mode_rgb_mode == 4) {
+        if(val == 0x55) {
+            
+        } else {
+            val = 0x55;
+            ShowRgbSed(0x00,0x00,0x00);
+        }
     }
 }
 
@@ -185,7 +236,7 @@ void ModeSetRing(u8 cmd,u8 data) {
         mode_mode_flag = data;
         EepromWrite(11,mode_mode_flag);
     } else {
-        ModeSet(mode_mode_flag,ModeCheck(mode_mode_flag));
+        ModeSet(mode_mode_flag,ModeCheck(mode_mode_flag, cmd));
     }
 }
 
@@ -199,7 +250,7 @@ void ModeSetRotation(u8 cmd) {
             } else {
                 mode_reg_flag = 0;
             }
-            EepromWrite(56,mode_reg_flag);
+            EepromWrite(55,mode_reg_flag);
         }
     } else if(cmd == 0x55) {
         if(mode_mode_flag == 0) {
@@ -210,10 +261,56 @@ void ModeSetRotation(u8 cmd) {
             } else {
                 mode_reg_flag = 8;
             }
-            EepromWrite(56,mode_reg_flag);
+            EepromWrite(55,mode_reg_flag);
         }
     }
 }
         
-            
-            
+void ModeSetColour(u8 cmd, u8 r, u8 g, u8 b) {
+    mode_reg_flag = cmd;
+    mode_led_rgb[cmd*3] = r;
+    mode_led_rgb[cmd*3+1] = g;
+    mode_led_rgb[cmd*3+2] = b;
+    EepromWrite(30+cmd*3,mode_led_rgb[cmd*3]);
+    EepromWrite(30+cmd*3+1,mode_led_rgb[cmd*3+1]);
+    EepromWrite(30+cmd*3+2,mode_led_rgb[cmd*3+2]);
+    EepromWrite(55,mode_reg_flag);
+    ShowRgbSed(r, g, b);
+}
+
+void ModeSetDevice(u8 data1, u8 data2, u8 data3, u8 data4) {
+    u8 read_i = 0;
+    mode_devic_flag[0] = data1;
+    mode_devic_flag[1] = data2;
+    mode_devic_flag[2] = data3;
+    mode_devic_flag[3] = data4;
+    for(read_i = 0;read_i < 4;read_i++) {
+        EepromWrite(12+read_i,mode_devic_flag[read_i]);
+    }
+}
+
+void ModeSetLed(u8 data1, u8 data2, u8 data3, u8 data4) {
+    u8 read_i = 0;
+    mode_led_flag[0] = data1;
+    mode_led_flag[1] = data2;
+    mode_led_flag[2] = data3;
+    mode_led_flag[3] = data4;
+    for(read_i = 0;read_i < 4;read_i++) {
+        EepromWrite(16+read_i,mode_led_flag[read_i]);
+    }
+}
+
+void ModeSetPhoto(u8 data1, u8 data2, u8 data3, u8 data4) {
+    u8 read_i = 0;
+    mode_photo_flag[0] = data1;
+    mode_photo_flag[1] = data2;
+    mode_photo_flag[2] = data3;
+    mode_photo_flag[3] = data4;
+    for(read_i = 0;read_i < 4;read_i++) {
+        EepromWrite(20+read_i,mode_photo_flag[read_i]);
+    }
+}
+
+u8 ModeGetPwm(u8 num) {
+    return mode_out_pwm[num];
+}

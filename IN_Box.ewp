@@ -1596,6 +1596,9 @@
     <name>$PROJ_DIR$\Mode.c</name>
   </file>
   <file>
+    <name>$PROJ_DIR$\Power.c</name>
+  </file>
+  <file>
     <name>$PROJ_DIR$\Prompt.c</name>
   </file>
   <file>

@@ -38,8 +38,7 @@ void CurrentsamplInit(void) {
  @discussion 
  @param   
  */
-float CurrentsamplGetCurrent(u8 passage) {
-    float current = 0;
+u16 CurrentsamplGetAd(u8 passage) {
     u16 ad_value = 0;
     u8 ad_h = 0;
     u8 ad_l = 0;
@@ -51,6 +50,18 @@ float CurrentsamplGetCurrent(u8 passage) {
     ad_h = ADC_DRH;
     ad_l = ADC_DRL;
 	ad_value = (ad_h<<8) + ad_l;
+    return ad_value;
+}
+/*!
+ @method     
+ @abstract   
+ @discussion 
+ @param   
+ */
+float CurrentsamplGetCurrent(u8 passage) {
+    float current = 0;
+    u16 ad_value = 0;
+	ad_value = CurrentsamplGetAd(passage);
     current = ((8.7153*ad_value)/65535);
 	return current;
 }
@@ -63,16 +74,7 @@ float CurrentsamplGetCurrent(u8 passage) {
 float CurrentsamplGetVoltage(u8 passage) {
     float voltage = 0;
     u16 ad_value = 0;
-    u8 ad_h = 0;
-    u8 ad_l = 0;
-	ADC_CSR = passage;
-	ADC_CR1 = 0x01;
-	DelayUs(7);
-	ADC_CR1 = ADC_CR1 | 0x01; 
-	while((ADC_CSR & 0x80) == 0); 
-    ad_h = ADC_DRH;
-    ad_l = ADC_DRL;
-	ad_value = (ad_h<<8) + ad_l;
+    ad_value = CurrentsamplGetAd(passage);
     voltage = ((6.6*ad_value)/65535);
     return voltage; 
 }
