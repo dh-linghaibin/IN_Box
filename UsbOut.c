@@ -36,13 +36,13 @@ void UsboutSet(u8 chx,u8 data) {
 	if(chx == 0x01) {
 		TIM1_CCR2L = data;  
 	}
-	if(chx == 0x03) {
+	if(chx == 0x02) {
 		TIM1_CCR3L = data; 
 	}
-	if(chx == 0x04) {
+	if(chx == 0x03) {
 		TIM1_CCR4L = data; 
 	}
-	if(chx == 0x05) {
+	if(chx == 0x04) {
 		TIM2_CCR3L = data;      
 	}
 }

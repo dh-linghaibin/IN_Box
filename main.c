@@ -38,27 +38,27 @@ int main(void) {
             if(ModeGetPwm(0) > 0x00) {
                 only_once_current = CurrentsamplGetCurrent(ADD_HAT1);
                 PowerAdd(0,only_once_current);
-                BluetoothSend(0x70,(u8)(only_once_current*100),0,0,0,0,0,0,0);
+                BluetoothSend(0x70,(u8)(only_once_current*10),0,0,0,0,0,0,0);
             }
             if(ModeGetPwm(1) > 0x00) {
                 only_once_current = CurrentsamplGetCurrent(ADD_HAT2);
                 PowerAdd(1,only_once_current);
-                BluetoothSend(0x70,0,(u8)(only_once_current*100),0,0,0,0,0,0);
+                BluetoothSend(0x70,0,(u8)(only_once_current*10),0,0,0,0,0,0);
             }   
             if(ModeGetPwm(2) > 0x00) {
                 only_once_current = CurrentsamplGetCurrent(ADD_HAT3);
                 PowerAdd(2,only_once_current);
-                BluetoothSend(0x70,0,0,(u8)(only_once_current*100),0,0,0,0,0);
+                BluetoothSend(0x70,0,0,(u8)(only_once_current*10),0,0,0,0,0);
             }
             if(ModeGetPwm(3) > 0x00) {
                 only_once_current = CurrentsamplGetCurrent(ADD_HAT4);
                 PowerAdd(3,only_once_current);
-                BluetoothSend(0x70,0,0,0,(u8)(only_once_current*100),0,0,0,0);
+                BluetoothSend(0x70,0,0,0,(u8)(only_once_current*10),0,0,0,0);
             }
             if(ModeGetPwm(4) > 0x00) {
                 only_once_current = CurrentsamplGetCurrent(ADD_HAT5);
                 PowerAdd(4,only_once_current);
-                BluetoothSend(0x70,0,0,0,0,(u8)(only_once_current*100),0,0,0);
+                BluetoothSend(0x70,0,0,0,0,(u8)(only_once_current*10),0,0,0);
             }
             
             if(CurrentsamplGetVoltage(IN_VOLTAGE) > 4.0) {
@@ -221,11 +221,11 @@ int main(void) {
                                             0,0,0,0,0,0,0);
 					break;
                     case 0x70://即使电流量采集
-                        BluetoothSend(0x70,(u8)(CurrentsamplGetCurrent(ADD_HAT1)*100),
-                                           (u8)(CurrentsamplGetCurrent(ADD_HAT2)*100),
-                                           (u8)(CurrentsamplGetCurrent(ADD_HAT3)*100),
-                                           (u8)(CurrentsamplGetCurrent(ADD_HAT4)*100),
-                                           (u8)(CurrentsamplGetCurrent(ADD_HAT5)*100),
+                        BluetoothSend(0x70,(u8)(CurrentsamplGetCurrent(ADD_HAT1)*10),
+                                           (u8)(CurrentsamplGetCurrent(ADD_HAT2)*10),
+                                           (u8)(CurrentsamplGetCurrent(ADD_HAT3)*10),
+                                           (u8)(CurrentsamplGetCurrent(ADD_HAT4)*10),
+                                           (u8)(CurrentsamplGetCurrent(ADD_HAT5)*10),
                                            0,0,0);
 					break;
                     default:break;

@@ -4,6 +4,7 @@
 #include "Usbout.h"
 #include "Show.h"
 #include "Bluetooth.h"
+#include "Com.h"
 
 static u8 mode_mode_flag = 0;
 static u8 mode_devic_flag[4] = {0,0,0,0};
@@ -47,6 +48,7 @@ void ModeInit(void) {
         mode_reg_flag = EepromRead(55);
         for(read_i = 0;read_i < 5;read_i++) {
             UsboutSet(read_i,mode_out_pwm[read_i]);
+            //UsboutSet(read_i,0xff); //Test Use
         }
     } else {
         EepromWrite(10,0x55);
@@ -234,6 +236,11 @@ void ModeShowBreath(void) {
 void ModeSetRing(u8 cmd,u8 data) {
     if((cmd&0x10) == 0x10) { //mode
         mode_mode_flag = data;
+        ComSendCmdWatch(mode_mode_flag+1,
+                        ModeCheck(mode_mode_flag,0x01),
+                        ModeCheck(mode_mode_flag,0x02),
+                        ModeCheck(mode_mode_flag,0x04),
+                        ModeCheck(mode_mode_flag,0x08));
         EepromWrite(11,mode_mode_flag);
     } else {
         ModeSet(mode_mode_flag,ModeCheck(mode_mode_flag, cmd));

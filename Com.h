@@ -14,4 +14,6 @@ u8 ComGetWatchData(u8 num);
 u8 ComGetWatchFlag(void);
 void ComClearWatchFlag(void);
 
+void ComSendCmdWatch(u8 cmd,u8 par1,u8 par2,u8 par3,u8 par4);
+
 #endif
