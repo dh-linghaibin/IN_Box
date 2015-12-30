@@ -11,14 +11,16 @@
  @discussion 
  @param   
  */
+#define BLUE_EN PD_ODR_ODR6     
+
 void BluetoothInit(void) {
     PA_DDR_DDR2 = 1;//BRTS
     PA_CR1_C12 = 1;
-    PA_CR2_C22 = 1;
+    PA_CR2_C22 = 0;
 
     PA_DDR_DDR1 = 1;//BCTS
     PA_CR1_C11 = 1;
-    PA_CR2_C21 = 1;
+    PA_CR2_C21 = 0;
     
     PD_DDR_DDR7 = 1;//EN
     PD_CR1_C17 = 1;
@@ -38,7 +40,7 @@ void BluetoothInit(void) {
     UART2_BRR2=0x02;//02 0a
     UART2_BRR1=0x68;//68 08
     UART2_CR2=0x2c;//允许接收，发送，开接收中断
-    //bule_en = 0;
+    BLUE_EN = 0;
 }
 /*!
  @method     

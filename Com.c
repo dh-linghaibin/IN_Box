@@ -10,7 +10,7 @@ void ComInit(void) {
     //watch
     PC_DDR_DDR6= 0;
     PC_CR1_C16 = 0;
-    PC_CR2_C26 = 1;
+    PC_CR2_C26 = 0;
     
 	EXTI_CR2 |= BIT(1);//开启PC口中断
 	EXTI_CR2 &= ~BIT(0);
@@ -200,13 +200,12 @@ __interrupt void EXTI_PORTE_IRQHandler(void)
 }
 
 
-#define COM_BIT_OUT1 		PE_ODR_ODR6
-#define COM_BIT_IN1 	 	PE_IDR_IDR6
-#define COM_BIT_DR1 		PE_DDR_DDR6
-#define COM_BIT_INT1 		PE_CR2_C26
+#define COM_BIT_OUT1 		PC_ODR_ODR6
+#define COM_BIT_IN1 	 	PC_IDR_IDR6
+#define COM_BIT_DR1 		PC_DDR_DDR6
+#define COM_BIT_INT1 		PC_CR2_C26
 
-u8 ComSendWatch(u8 data[])
-{
+u8 ComSendWatch(u8 data[]) {
 	u16 wait = 0;
 	u8 data_t = 0;//保存临时值
 	u8 i = 0,j = 0;
@@ -214,25 +213,25 @@ u8 ComSendWatch(u8 data[])
 	COM_BIT_INT1 = 0;//中断
 	COM_BIT_DR1 = 1;//设置为输出
 	COM_BIT_OUT1 = 0;
-	DelayUs(150);//拉低20ms说明总线开始
+	DelayUs(250);//拉低20ms说明总线开始 250
 	COM_BIT_DR1 = 0;//设置为输入
 	DelayUs(1);
 	while(COM_BIT_IN1 == 1)//等待从机拉高
 	{
-		if(wait < 150)
+		if(wait < 200)
 		{
 			wait++;
 		}
 		else//超时，退出
 		{
-			COM_BIT_INT1 = 1;//中断
+			//COM_BIT_INT1 = 1;//中断
 			return 0;
 		}
 	}
 	wait = 0;
 	while(COM_BIT_IN1 == 0)
 	{
-		if(wait < 150)
+		if(wait < 200)
 		{
 			wait++;
 		}
@@ -265,7 +264,7 @@ u8 ComSendWatch(u8 data[])
 	
 	COM_BIT_OUT1 = 1;
 	
-	COM_BIT_INT1 = 1;//中断
+	//COM_BIT_INT1 = 1;//中断
 	COM_BIT_DR1 = 0;//设置为输入
 	return 0x88;
 }
@@ -360,16 +359,17 @@ u8 ComReadWatch(u8 data_s[])
 void ComSendCmdWatch(u8 cmd,u8 par1,u8 par2,u8 par3,u8 par4)
 {
     u8 com_t_data[6] = {0,0,0,0,0,0};//前拨
-	u16 com_check = 0;//保存累加校验值
-	com_check = cmd+par1+par2+par3;
-	com_t_data[5] = com_check;
-	com_t_data[0] = cmd;
+	//u16 com_check = 0;//保存累加校验值
+	//com_check = cmd+par1+par2+par3+par4;
+	com_t_data[0] = cmd; //cmd
 	com_t_data[1] = par1;
 	com_t_data[2] = par2;
 	com_t_data[3] = par3;
     com_t_data[4] = par4;
+    com_t_data[5] = com_t_data[0]+com_t_data[1]+com_t_data[2]
+                                    +com_t_data[3]+com_t_data[4];
     INTOFF
-	ComSendRing(com_t_data);
+	ComSendWatch(com_t_data);
     INTEN
 }
 

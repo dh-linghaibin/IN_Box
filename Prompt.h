@@ -14,5 +14,6 @@ void PromptPocketReflect(void);
 void PromptPocketSetFlag(u8 cmd);
 void PromptMucicReflect(void);
 void PromptMucicSetFlag(u8 cmd);
+void PromptMusicShowdown(void);
 
 #endif

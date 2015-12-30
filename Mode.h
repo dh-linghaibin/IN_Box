@@ -21,4 +21,6 @@ void ModeSetPhoto(u8 data1, u8 data2, u8 data3, u8 data4);
 
 u8 ModeGetPwm(u8 num);
 
+void ModeAllShutdown(void);
+
 #endif

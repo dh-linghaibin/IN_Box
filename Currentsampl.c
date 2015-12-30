@@ -24,13 +24,20 @@ void CurrentsamplInit(void) {
     
     PE_DDR_DDR5= 1;//EN
     PE_CR1_C15 = 1;
-    PE_CR2_C25 = 1;
+    PE_CR2_C25 = 0; //0
+    
+    PC_DDR_DDR5= 1;//EN
+    PC_CR1_C15 = 1;
+    PC_CR2_C25 = 0; //0
     
     ADC_CSR &= ~BIT(6);
 	ADC_CSR &= ~BIT(4);
 	ADC_CR1 |= BIT(1);
 	ADC_CR2 |= BIT(1);
 	ADC_TDRL = 0x01;
+    
+    PE_ODR_ODR5 = 0;
+    PC_ODR_ODR5 = 0;
 }
 /*!
  @method     

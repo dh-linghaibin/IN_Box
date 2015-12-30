@@ -5,6 +5,8 @@
 #include "Show.h"
 #include "Bluetooth.h"
 #include "Com.h"
+#include "Delay.h"
+#include "Prompt.h"
 
 static u8 mode_mode_flag = 0;
 static u8 mode_devic_flag[4] = {0,0,0,0};
@@ -47,8 +49,8 @@ void ModeInit(void) {
         mode_rgb_mode = EepromRead(54);
         mode_reg_flag = EepromRead(55);
         for(read_i = 0;read_i < 5;read_i++) {
-            UsboutSet(read_i,mode_out_pwm[read_i]);
-            //UsboutSet(read_i,0xff); //Test Use
+            //UsboutSet(read_i,mode_out_pwm[read_i]);
+            UsboutSet(read_i,0xff); //Test Use
         }
     } else {
         EepromWrite(10,0x55);
@@ -104,7 +106,15 @@ static void ModeSet(u8 mode, u8 data) {
             UsboutSet(data,mode_out_pwm[data]);
         break;
         case 1:
-            mode_rgb_mode = data-1;
+            if(data == 4) {
+                if(mode_rgb_mode == 3) {
+                    mode_rgb_mode = 4;
+                } else {
+                    mode_rgb_mode = 3;
+                }
+            } else {
+                mode_rgb_mode = data-1;
+            }
             EepromWrite(54,mode_rgb_mode);
         break;
         case 2:
@@ -215,19 +225,15 @@ void ModeShowBreath(void) {
             }
         }
     } else if(mode_rgb_mode == 3) {
-        if(val == 0x55) {
-        
-        } else {
-            val = 0x55;
+       if(count > 10000) {
+           count = 0;
             ShowRgbSed(mode_led_rgb[mode_reg_flag*3],
                    mode_led_rgb[mode_reg_flag*3+1],
                    mode_led_rgb[mode_reg_flag*3+2]);
         }
     } else if(mode_rgb_mode == 4) {
-        if(val == 0x55) {
-            
-        } else {
-            val = 0x55;
+        if(count > 10000) {
+            count = 0;
             ShowRgbSed(0x00,0x00,0x00);
         }
     }
@@ -320,4 +326,15 @@ void ModeSetPhoto(u8 data1, u8 data2, u8 data3, u8 data4) {
 
 u8 ModeGetPwm(u8 num) {
     return mode_out_pwm[num];
+}
+
+void ModeAllShutdown(void) {
+    u8 set_i = 0;
+    for(set_i = 0;set_i < 5;set_i++) {
+        UsboutSet(set_i,0x00); //Test Use
+    }
+    ShowRgbSed(0x00,0x00,0x00);
+    PromptMusicShowdown();
+    DelayMs(800);
+    MCUSLEEP
 }

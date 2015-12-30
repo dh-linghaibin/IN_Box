@@ -597,7 +597,7 @@
         </option>
         <option>
           <name>IlinkIcfFile</name>
-          <state>$TOOLKIT_DIR$\config\lnkstm8s105c4.icf</state>
+          <state>$TOOLKIT_DIR$\config\lnkstm8.icf</state>
         </option>
         <option>
           <name>IlinkIcfFileSlave</name>
@@ -1568,12 +1568,6 @@
       <data/>
     </settings>
   </configuration>
-  <group>
-    <name>doc</name>
-    <file>
-      <name>$PROJ_DIR$\ReadMe.txt</name>
-    </file>
-  </group>
   <file>
     <name>$PROJ_DIR$\Bluetooth.c</name>
   </file>

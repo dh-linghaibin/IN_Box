@@ -11,15 +11,15 @@ void ShowInit(void) {
     
     PD_DDR_DDR0 = 1;
     PD_CR1_C10 = 1;
-    PD_CR2_C20 = 1;
+    PD_CR2_C20 = 0;//1
     
     PD_DDR_DDR2 = 1;
     PD_CR1_C12 = 1;
-    PD_CR2_C22 = 1;
+    PD_CR2_C22 = 0;//1
     
     PD_DDR_DDR3 = 1;
     PD_CR1_C13 = 1;
-    PD_CR2_C23 = 1;
+    PD_CR2_C23 = 0;//1
     
     TIM1_EGR |= 0x01;   //重新初始化TIM1 
 	TIM1_CR1 = 0x00;   //B7(0)可以直接写入 B65(00)边缘对齐模式B4(0)向上计数B3(0)计数器不停止发生更新事件
