@@ -14,7 +14,10 @@ static u16 power_bank[2] = {0,0};
 
 static u8 power_en_bit[2] = {0,0};
 
+static u16 power_locking[5] = {1000,1000,1000,1000,1000};
+
 void PowerInit(void) {
+    u8 read_i = 0;
     PG_DDR_DDR0 = 1;
     PG_CR1_C10 = 1;
     PG_CR2_C20 = 0;
@@ -27,11 +30,19 @@ void PowerInit(void) {
         EepromWrite(70,0x55);
         EepromWrite(71,0x01);
         EepromWrite(72,0x01);
+        for(read_i = 0; read_i < 5; read_i++) {
+            EepromWrite(72+(read_i*2),0x03);
+            EepromWrite(73+(read_i*2),0xe8);
+        }
     }
     power_en_bit[0] = EepromRead(71);
     power_en_bit[1] = EepromRead(72);
     POWER_LEFT = power_en_bit[0];
     POWER_RIGHT = power_en_bit[1];
+    for(read_i = 0; read_i < 5; read_i++) {
+        power_locking[read_i] = EepromRead(72+(read_i*2));
+        power_locking[read_i] |= (EepromRead(73+(read_i*2)) << 8);
+    }
 }
 
 void PowerSetBit(u8 bit, u8 cmd) {
@@ -74,3 +85,16 @@ void PowerBankSet(u8 num, u16 power) {
     power_bank[num] += power;
 }
 
+void PowerLockingSet(u8 num, u8 percentage) {
+    power_locking[num] = (u16)(power_bank[0]*(percentage/100) );
+    EepromWrite(72+(num*2),(u8)power_locking[num]);
+    EepromWrite(73+(num*2),(u8)(power_locking[num] >> 8));
+}
+
+u8 PowerLockingCloose(u8 num) {
+    if(power_bat[num] > power_locking[num]) {
+        return 0x80;
+    } else {
+        return 0x00;
+    }
+}

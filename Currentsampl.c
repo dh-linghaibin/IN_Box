@@ -38,6 +38,9 @@ void CurrentsamplInit(void) {
 	ADC_CR2 |= BIT(1);
 	ADC_TDRL = 0x01;
     
+    EXTI_CR1 |= BIT(2);//¿ªÆôPB¿ÚÖÐ¶Ï
+	EXTI_CR1 &= ~BIT(3);
+    
     PE_ODR_ODR2 = 0;
     PC_ODR_ODR7 = 0;
 }
@@ -113,4 +116,12 @@ void CurrentsamplCheckAsk(u8 num, float current) {
         ask[num] = 0;
     }
     BluetoothSend(0x70,ask[0],ask[1],ask[2],ask[3],ask[4],0,0,0);
+}
+
+#pragma vector=6
+__interrupt void EXTI_PORTB_IRQHandler(void)
+{
+    INTOFF
+
+    INTEN
 }

@@ -340,6 +340,20 @@ void ModeAllShutdown(void) {
     BluetoothSetEn(1);//cloose blue
     CurrentSetEn(1, 1);//cloose check
     PromptSetEn(1);//cloose
+    PB_CR2_C23 = 1; //open int
     DelayMs(800);
     MCUSLEEP
+}
+
+void ModeAllOpen(void) {
+    PB_CR2_C23 = 0; //close int
+    BluetoothSetEn(0);//open blue
+    CurrentSetEn(0, 0);//open check
+    PromptSetEn(0);//open
+}
+
+void ModeSetOut(u8 num,u8 data) {
+    mode_out_pwm[num] = data;
+    EepromWrite(25+num,mode_out_pwm[num]);
+    UsboutSet(num,mode_out_pwm[num]);
 }
