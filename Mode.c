@@ -7,6 +7,7 @@
 #include "Com.h"
 #include "Delay.h"
 #include "Prompt.h"
+#include "Currentsampl.h"
 
 static u8 mode_mode_flag = 0;
 static u8 mode_devic_flag[4] = {0,0,0,0};
@@ -49,8 +50,9 @@ void ModeInit(void) {
         mode_rgb_mode = EepromRead(54);
         mode_reg_flag = EepromRead(55);
         for(read_i = 0;read_i < 5;read_i++) {
-            //UsboutSet(read_i,mode_out_pwm[read_i]);
-            UsboutSet(read_i,0xff); //Test Use
+            UsboutSet(read_i,mode_out_pwm[read_i]);
+            //mode_out_pwm[read_i] = 0xff;
+            //UsboutSet(read_i,0xff); //Test Use
         }
     } else {
         EepromWrite(10,0x55);
@@ -335,6 +337,9 @@ void ModeAllShutdown(void) {
     }
     ShowRgbSed(0x00,0x00,0x00);
     PromptMusicShowdown();
+    BluetoothSetEn(1);//cloose blue
+    CurrentSetEn(1, 1);//cloose check
+    PromptSetEn(1);//cloose
     DelayMs(800);
     MCUSLEEP
 }

@@ -4,9 +4,9 @@
 
 void ComInit(void) {
     //ring
-    PE_DDR_DDR2= 0;
-    PE_CR1_C12 = 0;
-    PE_CR2_C22 = 1;
+    PE_DDR_DDR3= 0;
+    PE_CR1_C13 = 0;
+    PE_CR2_C23 = 1;
     //watch
     PC_DDR_DDR6= 0;
     PC_CR1_C16 = 0;
@@ -19,10 +19,10 @@ void ComInit(void) {
 	EXTI_CR1 &= ~BIT(4);
 }
 
-#define COM_BIT_OUT 	PE_ODR_ODR2
-#define COM_BIT_IN 	 	PE_IDR_IDR2
-#define COM_BIT_DR 		PE_DDR_DDR2
-#define COM_BIT_INT 	PE_CR2_C22
+#define COM_BIT_OUT 	PE_ODR_ODR3
+#define COM_BIT_IN 	 	PE_IDR_IDR3
+#define COM_BIT_DR 		PE_DDR_DDR3
+#define COM_BIT_INT 	PE_CR2_C23
 
 u8 ComSendRing(u8 data[])
 {

@@ -6,6 +6,8 @@
 #define PROMMPT_MOTO    PA_ODR_ODR4
 #define IN_POCKET       PE_IDR_IDR0
 
+#define PROMPT_EN PA_ODR_ODR1
+
 static u8 prompt_music_flag = 0;
 
 static u8 pocket_flag = 0;
@@ -22,6 +24,11 @@ void PromptInit(void) {
     PE_DDR_DDR0= 0;
     PE_CR1_C10 = 1;
     PE_CR2_C20 = 0;
+    
+    PA_DDR_DDR1 = 1;//BCTS
+    PA_CR1_C11 = 1;
+    PA_CR2_C21 = 0;
+    
     if(EepromRead(60) == 0x55) {
         prompt_music_flag = EepromRead(61);
         pocket_flag = EepromRead(62);
@@ -30,6 +37,12 @@ void PromptInit(void) {
         EepromWrite(61,0x01);
         EepromWrite(62,0x01);
     }
+    
+    PA_ODR_ODR1 = 0;//Enable check
+}
+
+void PromptSetEn(u8 cmd) {
+    PA_ODR_ODR1 = cmd;
 }
 
 static u8 prompt_music = 0;
@@ -58,7 +71,7 @@ void PromptTimeServive(void) {
             prompt_count_moto = 0;
             prompt_moto--;
         }
-        if(prompt_count_moto == 1) {
+        if(prompt_moto == 1) {
             PROMMPT_MOTO = 0;
         }
     }
@@ -78,7 +91,7 @@ void PromptMucicReflect(void) {
     if(prompt_music_flag == 1) {
         PromptSetMusic(20);
     } else if(prompt_music_flag == 2) {
-        PromptSetMoto(10);
+        PromptSetMoto(20);
     } else if(prompt_music_flag == 3) {
         PromptSetMusic(20);
         PromptSetMoto(20);

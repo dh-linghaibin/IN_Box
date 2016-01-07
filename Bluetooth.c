@@ -18,10 +18,6 @@ void BluetoothInit(void) {
     PA_CR1_C12 = 1;
     PA_CR2_C22 = 0;
 
-    PA_DDR_DDR1 = 1;//BCTS
-    PA_CR1_C11 = 1;
-    PA_CR2_C21 = 0;
-    
     PD_DDR_DDR7 = 1;//EN
     PD_CR1_C17 = 1;
     PD_CR2_C27 = 1;
@@ -37,11 +33,25 @@ void BluetoothInit(void) {
     UART2_CR1=0x00;
     UART2_CR2=0x00;
     UART2_CR3=0x00; 
-    UART2_BRR2=0x02;//02 0a
-    UART2_BRR1=0x68;//68 08
+    UART2_BRR2=0x0a;//02 0a
+    UART2_BRR1=0x08;//68 08
     UART2_CR2=0x2c;//允许接收，发送，开接收中断
     BLUE_EN = 0;
+    BluetoothSendSrt("TTM:RENPowearIN");
 }
+
+void BluetoothSetEn(u8 cmd) {
+    BLUE_EN = cmd;
+}
+
+void BluetoothSendSrt(u8 * pd) {
+    while((*pd)!='\0') {
+        while((UART2_SR & 0x80) == 0x00);   
+        UART2_DR = *pd;   
+        pd++;  
+    }
+}
+
 /*!
  @method     
  @abstract   

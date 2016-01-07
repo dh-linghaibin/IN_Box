@@ -16,7 +16,6 @@
 #include "Prompt.h"
 #include "Power.h"
 
-
 int main(void) {
     SysInit();
     EeepromInit();
@@ -28,6 +27,7 @@ int main(void) {
     ComInit();
     TimerInit();
     ModeInit();
+    PowerInit();
     INTEN
     while(1) {
         ModeShowBreath();
@@ -39,30 +39,28 @@ int main(void) {
             if(ModeGetPwm(0) > 0x00) {
                 only_once_current = CurrentsamplGetCurrent(ADD_HAT1);
                 PowerAdd(0,only_once_current);
-                //BluetoothSend(0x70,(u8)cc[0],0,0,0,0,0,0,0);
+                CurrentsamplCheckAsk(0,only_once_current);
             }
             if(ModeGetPwm(1) > 0x00) {
                 only_once_current = CurrentsamplGetCurrent(ADD_HAT2);
                 PowerAdd(1,only_once_current);
-                //BluetoothSend(0x70,0,(u8)cc[1],0,0,0,0,0,0);
+                CurrentsamplCheckAsk(1,only_once_current);
             }   
             if(ModeGetPwm(2) > 0x00) {
                 only_once_current = CurrentsamplGetCurrent(ADD_HAT3);
                 PowerAdd(2,only_once_current);
-                //BluetoothSend(0x70,0,0,(u8)cc[2],0,0,0,0,0);
+                CurrentsamplCheckAsk(2,only_once_current);
             }
             if(ModeGetPwm(3) > 0x00) {
                 only_once_current = CurrentsamplGetCurrent(ADD_HAT4);
                 PowerAdd(3,only_once_current);
-                //BluetoothSend(0x70,0,0,0,(u8)cc[3],0,0,0,0);
+                CurrentsamplCheckAsk(3,only_once_current);
             }
             if(ModeGetPwm(4) > 0x00) {
                 only_once_current = CurrentsamplGetCurrent(ADD_HAT5);
                 PowerAdd(4,only_once_current);
-                ///BluetoothSend(0x70,0,0,0,0,(u8)cc[4],0,0,0);
+                CurrentsamplCheckAsk(4,only_once_current);
             }
-            //BluetoothSend(0x70,(u8)cc[0],(u8)cc[1],(u8)cc[2],(u8)cc[3],(u8)cc[4],0,0,0);
-            
             if(CurrentsamplGetVoltage(IN_VOLTAGE) > 4.0) {
                 PowerSub(0,CurrentsamplGetCurrent(CHARGING_1));
                 PowerSub(1,CurrentsamplGetCurrent(CHARGING_2));
@@ -194,11 +192,8 @@ int main(void) {
                         
                     break;
                     case 0x10://移动电源设置 打开还是关闭
-                    if(BluetoothGetDataRx(2) == 0x00) {
-                        
-                    } else {
-
-                    }
+                    PowerSetBit(0,BluetoothGetDataRx(2));
+                    PowerSetBit(1,BluetoothGetDataRx(3));
                     BluetoothSend(0x10,BluetoothGetDataRx(2),
                                        BluetoothGetDataRx(3),
                                        0,0,0,0,0,0);
