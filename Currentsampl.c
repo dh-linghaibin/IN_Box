@@ -84,7 +84,7 @@ float CurrentsamplGetCurrent(u8 passage) {
     float current = 0;
     u16 ad_value = 0;
 	ad_value = CurrentsamplGetAd(passage);
-    current = ((8.7153*ad_value)/65535);
+    current = ((5.91870967741*ad_value)/65535); //(1/1.55)*3.3*2.87
     if(current < 0) {
         current = 0;
     }

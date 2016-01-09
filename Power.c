@@ -37,8 +37,26 @@ void PowerInit(void) {
     }
     power_en_bit[0] = EepromRead(71);
     power_en_bit[1] = EepromRead(72);
-    POWER_LEFT = power_en_bit[0];
-    POWER_RIGHT = power_en_bit[1];
+    if(power_en_bit[0] == 0) {
+        PG_DDR_DDR0 = 0;
+        PG_CR1_C10 = 0;
+        PG_CR2_C20 = 0;
+    } else {
+        POWER_LEFT = power_en_bit[0];
+        PG_DDR_DDR0 = 1;
+        PG_CR1_C10 = 1;
+        PG_CR2_C20 = 0;
+    }
+    if(power_en_bit[1] == 0) {
+        PG_DDR_DDR1 = 0;
+        PG_CR1_C11 = 0;
+        PG_CR2_C21 = 0;
+    } else {
+        POWER_RIGHT = power_en_bit[0];
+        PG_DDR_DDR1 = 1;
+        PG_CR1_C11 = 1;
+        PG_CR2_C21 = 0;
+    }
     for(read_i = 0; read_i < 5; read_i++) {
         power_locking[read_i] = EepromRead(72+(read_i*2));
         power_locking[read_i] |= (EepromRead(73+(read_i*2)) << 8);
@@ -47,8 +65,26 @@ void PowerInit(void) {
 
 void PowerSetBit(u8 bit, u8 cmd) {
     power_en_bit[bit] = cmd;
-    POWER_LEFT = power_en_bit[0];
-    POWER_RIGHT = power_en_bit[1];
+    if(power_en_bit[0] == 0) {
+        PG_DDR_DDR0 = 0;
+        PG_CR1_C10 = 0;
+        PG_CR2_C20 = 0;
+    } else {
+        POWER_LEFT = power_en_bit[0];
+        PG_DDR_DDR0 = 1;
+        PG_CR1_C10 = 1;
+        PG_CR2_C20 = 0;
+    }
+    if(power_en_bit[1] == 0) {
+        PG_DDR_DDR1 = 0;
+        PG_CR1_C11 = 0;
+        PG_CR2_C21 = 0;
+    } else {
+        POWER_RIGHT = power_en_bit[0];
+        PG_DDR_DDR1 = 1;
+        PG_CR1_C11 = 1;
+        PG_CR2_C21 = 0;
+    }
 }
 
 void PowerAdd(u8 num, float power) {
@@ -97,4 +133,8 @@ u8 PowerLockingCloose(u8 num) {
     } else {
         return 0x00;
     }
+}
+
+u8 PowerCountBlank(u8 cmd) {
+    return (u8)( (power_bank[cmd] - PowerGetAll())*100 /power_bank[cmd] );
 }

@@ -27,6 +27,7 @@ static u8 mode_led_rgb[24] = {
 };
 static u8 mode_reg_flag = 0;
 static u8 mode_rgb_mode = 0;
+static u8 out_bit = 0x00;
 
 void ModeInit(void) {
     u8 read_i = 0;
@@ -51,6 +52,11 @@ void ModeInit(void) {
         mode_reg_flag = EepromRead(55);
         for(read_i = 0;read_i < 5;read_i++) {
             UsboutSet(read_i,mode_out_pwm[read_i]);
+            if(mode_out_pwm[read_i] > 0x00) {
+                out_bit &= ~BIT(read_i);
+            } else {
+                out_bit |= BIT(read_i);
+            }
             //mode_out_pwm[read_i] = 0xff;
             //UsboutSet(read_i,0xff); //Test Use
         }
@@ -101,11 +107,14 @@ static void ModeSet(u8 mode, u8 data) {
         case 0:
             if(mode_out_pwm[data] > 0) {
                 mode_out_pwm[data] = 0x00;
+                out_bit &= ~BIT(data);
             } else {
                 mode_out_pwm[data] = 0xff;
+                out_bit |= BIT(data);
             }
             EepromWrite(25+data,mode_out_pwm[data]);
             UsboutSet(data,mode_out_pwm[data]);
+            ComSendCmdWatch(0x05,out_bit,0,0,0);
         break;
         case 1:
             if(data == 4) {
@@ -337,10 +346,12 @@ void ModeAllShutdown(void) {
     }
     ShowRgbSed(0x00,0x00,0x00);
     PromptMusicShowdown();
+    BluetoothSendSrt("TTM:RENPowearIN");
     BluetoothSetEn(1);//cloose blue
     CurrentSetEn(1, 1);//cloose check
     PromptSetEn(1);//cloose
     PB_CR2_C23 = 1; //open int
+    ComSendCmdWatch(0x07,0,0,0,0);
     DelayMs(800);
     MCUSLEEP
 }

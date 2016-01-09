@@ -24,11 +24,11 @@ int main(void) {
     PromptInit();
     ShowInit();
     CurrentsamplInit();
-    BluetoothInit();
     ComInit();
     TimerInit();
     ModeInit();
     PowerInit();
+    BluetoothInit();
     INTEN
     while(1) {
         ModeShowBreath();
@@ -86,6 +86,8 @@ int main(void) {
             if(CurrentsamplGetVoltage(BAT_VOLTAGE) < 3.6) {
                 ModeAllShutdown();//sleep
             }
+            //更新电量
+            ComSendCmdWatch(0x04,PowerCountBlank(0),PowerCountBlank(1),0,0);
             //温度
             
             //口袋

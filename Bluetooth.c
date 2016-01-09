@@ -11,7 +11,7 @@
  @discussion 
  @param   
  */
-#define BLUE_EN PD_ODR_ODR6     
+#define BLUE_EN PD_ODR_ODR7     
 
 void BluetoothInit(void) {
     PA_DDR_DDR2 = 1;//BRTS
@@ -44,12 +44,18 @@ void BluetoothSetEn(u8 cmd) {
     BLUE_EN = cmd;
 }
 
+static void blue_send(u8 ch)
+{
+    while((UART2_SR & 0x80) == 0x00);
+        UART2_DR = ch;       
+}
+
 void BluetoothSendSrt(u8 * pd) {
-    while((*pd)!='\0') {
-        while((UART2_SR & 0x80) == 0x00);   
-        UART2_DR = *pd;   
-        pd++;  
-    }
+	while((*pd)!='\0') 
+	{
+		blue_send(*pd); 
+		pd++;  
+	}
 }
 
 /*!

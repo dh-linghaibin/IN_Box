@@ -36,14 +36,15 @@ ActionState=1
 Enabled=0
 ShowSource=1
 [DebugChecksum]
-Checksum=-184934304
+Checksum=513663131
 [CallStack]
 ShowArgs=0
 [Disassembly]
 MixedMode=1
 [array_types]
-Fmt0=u8[5]	4	0
-Fmt1=u8[6]	4	0
+Fmt0=u8[13]	4	0
+Fmt1=u8[5]	4	0
+Fmt2=u8[6]	4	0
 [watch_formats]
 Fmt0={W}0:com_t_data[0]	4	0
 Fmt1={W}42:mode_mode_flag	4	0
@@ -53,9 +54,6 @@ LogEnabled=0
 GraphEnabled=0
 ShowTimeLog=1
 ShowTimeSum=1
-[Breakpoints]
-Bp0=_ "STD_CODE" "{$PROJ_DIR$\Currentsampl.c}.124.5" 1 0 0 0 "" 0 ""
-Count=1
 [Log file]
 LoggingEnabled=_ 0
 LogFile=_ ""
@@ -63,6 +61,10 @@ Category=_ 0
 [TermIOLog]
 LoggingEnabled=_ 0
 LogFile=_ ""
+[Breakpoints]
+Bp0=_ "STD_CODE" "{$PROJ_DIR$\Currentsampl.c}.124.5" 1 0 0 0 "" 0 ""
+Bp1=_ "STD_DATA" "BluetoothInit" 1 0 0 3 0 "" 0 ""
+Count=2
 [Aliases]
 Count=0
 SuppressDialog=0
