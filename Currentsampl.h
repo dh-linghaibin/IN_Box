@@ -24,5 +24,6 @@ float CurrentsamplGetCurrent(u8 passage);
 float CurrentsamplGetVoltage(u8 passage);
 void CurrentSetEn(u8 cmd1, u8 cmd2);
 void CurrentsamplCheckAsk(u8 num, float current) ;
+u8 CurrentFinishingchannel(u8 channel);
 
 #endif 

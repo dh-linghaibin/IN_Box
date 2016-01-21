@@ -3,7 +3,7 @@
 #include "Power.h"
 #include "Eeprom.h"
 
-#define POWER_LEFT      PG_ODR_ODR0
+#define POWER_LEFT      PE_ODR_ODR1
 #define POWER_RIGHT     PG_ODR_ODR1
 
 static float power_bat[5] = {0,0,0,0,0};
@@ -18,9 +18,9 @@ static u16 power_locking[5] = {1000,1000,1000,1000,1000};
 
 void PowerInit(void) {
     u8 read_i = 0;
-    PG_DDR_DDR0 = 1;
-    PG_CR1_C10 = 1;
-    PG_CR2_C20 = 0;
+    PE_DDR_DDR1 = 1;
+    PE_CR1_C11 = 1;
+    PE_CR2_C21 = 0;
     
     PG_DDR_DDR1 = 1;
     PG_CR1_C11 = 1;
@@ -38,24 +38,14 @@ void PowerInit(void) {
     power_en_bit[0] = EepromRead(71);
     power_en_bit[1] = EepromRead(72);
     if(power_en_bit[0] == 0) {
-        PG_DDR_DDR0 = 0;
-        PG_CR1_C10 = 0;
-        PG_CR2_C20 = 0;
+        POWER_LEFT = 1;
     } else {
-        POWER_LEFT = power_en_bit[0];
-        PG_DDR_DDR0 = 1;
-        PG_CR1_C10 = 1;
-        PG_CR2_C20 = 0;
+        POWER_LEFT = 0;
     }
     if(power_en_bit[1] == 0) {
-        PG_DDR_DDR1 = 0;
-        PG_CR1_C11 = 0;
-        PG_CR2_C21 = 0;
+        POWER_RIGHT = 0;
     } else {
-        POWER_RIGHT = power_en_bit[0];
-        PG_DDR_DDR1 = 1;
-        PG_CR1_C11 = 1;
-        PG_CR2_C21 = 0;
+        POWER_RIGHT = 1;
     }
     for(read_i = 0; read_i < 5; read_i++) {
         power_locking[read_i] = EepromRead(72+(read_i*2));
@@ -65,25 +55,17 @@ void PowerInit(void) {
 
 void PowerSetBit(u8 bit, u8 cmd) {
     power_en_bit[bit] = cmd;
+    EepromWrite(71,power_en_bit[0]);
+    EepromWrite(72,power_en_bit[1]);
     if(power_en_bit[0] == 0) {
-        PG_DDR_DDR0 = 0;
-        PG_CR1_C10 = 0;
-        PG_CR2_C20 = 0;
+        POWER_LEFT = 1;
     } else {
-        POWER_LEFT = power_en_bit[0];
-        PG_DDR_DDR0 = 1;
-        PG_CR1_C10 = 1;
-        PG_CR2_C20 = 0;
+        POWER_LEFT = 0;
     }
     if(power_en_bit[1] == 0) {
-        PG_DDR_DDR1 = 0;
-        PG_CR1_C11 = 0;
-        PG_CR2_C21 = 0;
+        POWER_RIGHT = 0;
     } else {
-        POWER_RIGHT = power_en_bit[0];
-        PG_DDR_DDR1 = 1;
-        PG_CR1_C11 = 1;
-        PG_CR2_C21 = 0;
+        POWER_RIGHT = 1;
     }
 }
 

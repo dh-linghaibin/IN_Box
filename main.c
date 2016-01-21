@@ -16,7 +16,6 @@
 #include "Prompt.h"
 #include "Power.h"
 
-     
 int main(void) {
     SysInit();
     EeepromInit();
@@ -35,48 +34,22 @@ int main(void) {
         PromptTimeServive();
         BluetoothTimeServive();
         if(TimerGetSecFlag() == 0x80) {//One second arrive
+            u8 read_i = 0;
             float only_once_current = 0;
             TimerClearSecFlag();//Clear flag
             ModeAllOpen();
-            if(ModeGetPwm(0) > 0x00) {
-                only_once_current = CurrentsamplGetCurrent(ADD_HAT1);
-                PowerAdd(0,only_once_current);
-                CurrentsamplCheckAsk(0,only_once_current);
-                if(PowerLockingCloose(0) == 0x80) {
-                    ModeSetOut(0,0x00);//Close port
-                }
-            }
-            if(ModeGetPwm(1) > 0x00) {
-                only_once_current = CurrentsamplGetCurrent(ADD_HAT2);
-                PowerAdd(1,only_once_current);
-                CurrentsamplCheckAsk(1,only_once_current);
-                if(PowerLockingCloose(1) == 0x80) {
-                    ModeSetOut(1,0x00);//Close port
-                }
-            }   
-            if(ModeGetPwm(2) > 0x00) {
-                only_once_current = CurrentsamplGetCurrent(ADD_HAT3);
-                PowerAdd(2,only_once_current);
-                CurrentsamplCheckAsk(2,only_once_current);
-                if(PowerLockingCloose(2) == 0x80) {
-                    ModeSetOut(2,0x00);//Close port
-                }
-            }
-            if(ModeGetPwm(3) > 0x00) {
-                only_once_current = CurrentsamplGetCurrent(ADD_HAT4);
-                PowerAdd(3,only_once_current);
-                CurrentsamplCheckAsk(3,only_once_current);
-                if(PowerLockingCloose(3) == 0x80) {
-                    ModeSetOut(3,0x00);//Close port
-                }
-            }
-            if(ModeGetPwm(4) > 0x00) {
-                only_once_current = CurrentsamplGetCurrent(ADD_HAT5);
-                PowerAdd(4,only_once_current);
-                CurrentsamplCheckAsk(4,only_once_current);
-                if(PowerLockingCloose(4) == 0x80) {
-                    ModeSetOut(4,0x00);//Close port
-                }
+            for(read_i = 0; read_i < 5;read_i++) {
+                 if(ModeGetPwm(read_i) > 0x00) {
+                    only_once_current = CurrentsamplGetCurrent
+                                                (CurrentFinishingchannel(read_i));
+                    PowerAdd(read_i,only_once_current);
+                    CurrentsamplCheckAsk(read_i,only_once_current);
+                    if(PowerLockingCloose(read_i) == 0x80) {
+                       // ModeSetOut(read_i,0x00);//Close port
+                    }
+                 } else {
+                    CurrentsamplCheckAsk(read_i,0x00);
+                 }
             }
             if(CurrentsamplGetVoltage(IN_VOLTAGE) > 4.0) {
                 PowerSub(0,CurrentsamplGetCurrent(CHARGING_1));
@@ -84,7 +57,7 @@ int main(void) {
             }
             //电池电压检测
             if(CurrentsamplGetVoltage(BAT_VOLTAGE) < 3.6) {
-                ModeAllShutdown();//sleep
+                //ModeAllShutdown();//sleep
             }
             //更新电量
             ComSendCmdWatch(0x04,PowerCountBlank(0),PowerCountBlank(1),0,0);
@@ -228,11 +201,11 @@ int main(void) {
                                             0,0,0,0,0,0,0);
                     break;
                     case 0x11://设备设置与状态
-                        for(read_i = 2; read_i < 6; read_i++) {
+                        for(read_i = 2; read_i < 7; read_i++) {
                             if(BluetoothGetDataRx(read_i) == 1) {
-                                UsboutSet(read_i-2, 0xff);
-                            } else {
                                 UsboutSet(read_i-2, 0x00);
+                            } else if(BluetoothGetDataRx(read_i) == 0){
+                                UsboutSet(read_i-2, 0xff);
                             }
                         }   
                     break;  

@@ -6,109 +6,86 @@
   <configuration>
     <name>Debug</name>
     <outputs>
-      <file>$PROJ_DIR$\main.c</file>
       <file>$PROJ_DIR$\Mode.c</file>
       <file>$PROJ_DIR$\Power.c</file>
       <file>$PROJ_DIR$\Prompt.c</file>
+      <file>$PROJ_DIR$\Show.c</file>
       <file>$PROJ_DIR$\Bluetooth.c</file>
       <file>$PROJ_DIR$\Com.c</file>
       <file>$PROJ_DIR$\Currentsampl.c</file>
       <file>$PROJ_DIR$\Eelay.c</file>
       <file>$PROJ_DIR$\Eeprom.c</file>
-      <file>$TOOLKIT_DIR$\inc\iostm8s105c4.h</file>
-      <file>$TOOLKIT_DIR$\lib\dlstm8smn.a</file>
-      <file>$PROJ_DIR$\Debug\Obj\Currentsampl.pbi</file>
-      <file>$PROJ_DIR$\Mode.h</file>
-      <file>$PROJ_DIR$\Debug\Obj\UsbOut.o</file>
-      <file>$TOOLKIT_DIR$\config\lnkstm8s105c4.icf</file>
-      <file>$PROJ_DIR$\Debug\Obj\Prompt.pbi</file>
-      <file>$PROJ_DIR$\Debug\Obj\Com.o</file>
-      <file>$PROJ_DIR$\Debug\Obj\Com.pbi</file>
-      <file>$PROJ_DIR$\Eeprom.h</file>
-      <file>$PROJ_DIR$\Debug\Exe\templproj.out</file>
-      <file>$PROJ_DIR$\Timer.h</file>
-      <file>$PROJ_DIR$\Debug\Obj\Mode.o</file>
-      <file>$PROJ_DIR$\Debug\Obj\Timer.o</file>
-      <file>$PROJ_DIR$\Debug\Obj\Show.pbi</file>
-      <file>$PROJ_DIR$\Debug\Obj\Sys.pbi</file>
+      <file>$PROJ_DIR$\main.c</file>
       <file>$PROJ_DIR$\Power.h</file>
-      <file>$PROJ_DIR$\Debug\Obj\Currentsampl.o</file>
-      <file>$PROJ_DIR$\Debug\Obj\Timer.pbi</file>
-      <file>$PROJ_DIR$\Debug\Obj\Show.o</file>
-      <file>$PROJ_DIR$\Debug\Obj\Eelay.pbi</file>
-      <file>$PROJ_DIR$\Debug\Obj\Mode.pbi</file>
-      <file>$PROJ_DIR$\Debug\Obj\Prompt.o</file>
-      <file>$PROJ_DIR$\Debug\Obj\main.o</file>
-      <file>$PROJ_DIR$\Show.c</file>
-      <file>$PROJ_DIR$\Show.h</file>
-      <file>$PROJ_DIR$\Bluetooth.h</file>
-      <file>$PROJ_DIR$\Debug\Obj\main.pbi</file>
-      <file>$PROJ_DIR$\Com.h</file>
-      <file>$PROJ_DIR$\Debug\Obj\Power.o</file>
-      <file>$TOOLKIT_DIR$\inc\io_macros.h</file>
-      <file>$PROJ_DIR$\Sys.c</file>
-      <file>$PROJ_DIR$\UsbOut.h</file>
-      <file>$TOOLKIT_DIR$\lib\dbgstm8smd.a</file>
-      <file>$PROJ_DIR$\Debug\Obj\Eelay.o</file>
-      <file>$PROJ_DIR$\Debug\Obj\Bluetooth.o</file>
-      <file>$PROJ_DIR$\Timer.c</file>
-      <file>$PROJ_DIR$\Debug\Obj\Eeprom.o</file>
-      <file>$PROJ_DIR$\Debug\Obj\Power.pbi</file>
       <file>$PROJ_DIR$\Debug\Obj\Bluetooth.pbi</file>
       <file>$PROJ_DIR$\Delay.h</file>
-      <file>$PROJ_DIR$\Debug\Obj\Eeprom.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\Currentsampl.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\Eeprom.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\Com.pbi</file>
+      <file>$TOOLKIT_DIR$\config\lnkstm8s105c4.icf</file>
+      <file>$PROJ_DIR$\Debug\Obj\Bluetooth.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\UsbOut.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\IN_Box.pbd</file>
+      <file>$PROJ_DIR$\Debug\Obj\Sys.o</file>
+      <file>$PROJ_DIR$\UsbOut.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\Prompt.pbi</file>
+      <file>$PROJ_DIR$\Currentsampl.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\Prompt.o</file>
+      <file>$PROJ_DIR$\Show.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\Eelay.o</file>
+      <file>$TOOLKIT_DIR$\lib\dbgstm8smd.a</file>
+      <file>$PROJ_DIR$\Sys.h</file>
+      <file>$TOOLKIT_DIR$\lib\dlstm8smn.a</file>
+      <file>$PROJ_DIR$\Debug\Obj\Timer.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\UsbOut.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\Power.pbi</file>
+      <file>$PROJ_DIR$\Debug\Exe\templproj.out</file>
+      <file>$PROJ_DIR$\Timer.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\Show.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\Currentsampl.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\Show.o</file>
+      <file>$TOOLKIT_DIR$\inc\io_macros.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\Com.o</file>
       <file>$PROJ_DIR$\Prompt.h</file>
       <file>$PROJ_DIR$\Type.h</file>
-      <file>$PROJ_DIR$\Debug\Obj\IN_Box.pbd</file>
-      <file>$PROJ_DIR$\Currentsampl.h</file>
-      <file>$PROJ_DIR$\Debug\Obj\Sys.o</file>
-      <file>$PROJ_DIR$\Sys.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\Mode.o</file>
+      <file>$TOOLKIT_DIR$\inc\iostm8s105c4.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\Power.o</file>
       <file>$PROJ_DIR$\UsbOut.c</file>
-      <file>$PROJ_DIR$\Debug\Obj\UsbOut.pbi</file>
+      <file>$PROJ_DIR$\Com.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\Mode.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\Eelay.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\main.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\Eeprom.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\Sys.pbi</file>
+      <file>$PROJ_DIR$\Timer.c</file>
+      <file>$PROJ_DIR$\Bluetooth.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\Timer.pbi</file>
+      <file>$PROJ_DIR$\Mode.h</file>
+      <file>$PROJ_DIR$\Eeprom.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\main.pbi</file>
+      <file>$PROJ_DIR$\Sys.c</file>
     </outputs>
-    <file>
-      <name>$PROJ_DIR$\main.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 36</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 32</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 56 52 9 39 34 41 54 35 37 18 20 12 51 25</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 56 52 9 39 34 41 54 35 37 18 20 12 51 25</file>
-        </tool>
-      </inputs>
-    </file>
     <file>
       <name>$PROJ_DIR$\Mode.c</name>
       <outputs>
         <tool>
           <name>BICOMP</name>
-          <file> 30</file>
+          <file> 47</file>
         </tool>
         <tool>
           <name>ICCSTM8</name>
-          <file> 21</file>
+          <file> 42</file>
         </tool>
       </outputs>
       <inputs>
         <tool>
           <name>BICOMP</name>
-          <file> 12 52 9 39 18 41 34 35 37 49 51 54</file>
+          <file> 55 41 43 38 56 21 25 53 46 12 40 23</file>
         </tool>
         <tool>
           <name>ICCSTM8</name>
-          <file> 12 52 9 39 18 41 34 35 37 49 51 54</file>
+          <file> 55 41 43 38 56 21 25 53 46 12 40 23</file>
         </tool>
       </inputs>
     </file>
@@ -117,53 +94,7 @@
       <outputs>
         <tool>
           <name>BICOMP</name>
-          <file> 47</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 38</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 25 52 9 39 18</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 25 52 9 39 18</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\Prompt.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 15</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 31</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 51 52 9 39 18</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 51 52 9 39 18</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\Bluetooth.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 48</file>
+          <file> 32</file>
         </tool>
         <tool>
           <name>ICCSTM8</name>
@@ -173,11 +104,80 @@
       <inputs>
         <tool>
           <name>BICOMP</name>
-          <file> 35 52 9 39</file>
+          <file> 10 41 43 38 56</file>
         </tool>
         <tool>
           <name>ICCSTM8</name>
-          <file> 35 52 9 39</file>
+          <file> 10 41 43 38 56</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Prompt.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 22</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 24</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 40 41 43 38 56</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 40 41 43 38 56</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Show.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 35</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 37</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 25 41 43 38</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 25 41 43 38</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Bluetooth.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 11</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 17</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 53 41 43 38 12</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 53 41 43 38 12</file>
         </tool>
       </inputs>
     </file>
@@ -186,21 +186,21 @@
       <outputs>
         <tool>
           <name>BICOMP</name>
-          <file> 17</file>
+          <file> 15</file>
         </tool>
         <tool>
           <name>ICCSTM8</name>
-          <file> 16</file>
+          <file> 39</file>
         </tool>
       </outputs>
       <inputs>
         <tool>
           <name>BICOMP</name>
-          <file> 37 52 9 39 49</file>
+          <file> 46 41 43 38 12</file>
         </tool>
         <tool>
           <name>ICCSTM8</name>
-          <file> 37 52 9 39 49</file>
+          <file> 46 41 43 38 12</file>
         </tool>
       </inputs>
     </file>
@@ -209,7 +209,30 @@
       <outputs>
         <tool>
           <name>BICOMP</name>
-          <file> 11</file>
+          <file> 13</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 36</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 23 41 43 38 12 53 56</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 23 41 43 38 12 53 56</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Eelay.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 48</file>
         </tool>
         <tool>
           <name>ICCSTM8</name>
@@ -219,34 +242,11 @@
       <inputs>
         <tool>
           <name>BICOMP</name>
-          <file> 54 52 9 39 49 35</file>
+          <file> 12 41 43 38</file>
         </tool>
         <tool>
           <name>ICCSTM8</name>
-          <file> 54 52 9 39 49 35</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\Eelay.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 29</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 43</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 49 52 9 39</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 49 52 9 39</file>
+          <file> 12 41 43 38</file>
         </tool>
       </inputs>
     </file>
@@ -259,17 +259,40 @@
         </tool>
         <tool>
           <name>ICCSTM8</name>
-          <file> 46</file>
+          <file> 14</file>
         </tool>
       </outputs>
       <inputs>
         <tool>
           <name>BICOMP</name>
-          <file> 18 52 9 39</file>
+          <file> 56 41 43 38</file>
         </tool>
         <tool>
           <name>ICCSTM8</name>
-          <file> 18 52 9 39</file>
+          <file> 56 41 43 38</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\main.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 57</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 49</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 28 41 43 38 25 21 23 53 46 56 34 55 40 10</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 28 41 43 38 25 21 23 53 46 56 34 55 40 10</file>
         </tool>
       </inputs>
     </file>
@@ -278,7 +301,7 @@
       <outputs>
         <tool>
           <name>ILINK</name>
-          <file> 19</file>
+          <file> 33</file>
         </tool>
       </outputs>
     </file>
@@ -287,76 +310,7 @@
       <inputs>
         <tool>
           <name>ILINK</name>
-          <file> 14 44 16 26 43 46 21 38 31 28 55 22 13 32 10 42</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\Show.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 23</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 28</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 34 52 9 39</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 34 52 9 39</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\Sys.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 24</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 55</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 56 52 9 39</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 56 52 9 39</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\Timer.c</name>
-      <outputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 27</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 22</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 20 52 9 39</file>
-        </tool>
-        <tool>
-          <name>ICCSTM8</name>
-          <file> 20 52 9 39</file>
+          <file> 16 17 39 36 26 14 42 44 24 37 20 30 31 49 29 27</file>
         </tool>
       </inputs>
     </file>
@@ -365,21 +319,67 @@
       <outputs>
         <tool>
           <name>BICOMP</name>
-          <file> 58</file>
+          <file> 18</file>
         </tool>
         <tool>
           <name>ICCSTM8</name>
-          <file> 13</file>
+          <file> 31</file>
         </tool>
       </outputs>
       <inputs>
         <tool>
           <name>BICOMP</name>
-          <file> 41 52 9 39</file>
+          <file> 21 41 43 38 55</file>
         </tool>
         <tool>
           <name>ICCSTM8</name>
-          <file> 41 52 9 39</file>
+          <file> 21 41 43 38 55</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Timer.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 54</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 30</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 34 41 43 38</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 34 41 43 38</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Sys.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 51</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 20</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 28 41 43 38</file>
+        </tool>
+        <tool>
+          <name>ICCSTM8</name>
+          <file> 28 41 43 38</file>
         </tool>
       </inputs>
     </file>

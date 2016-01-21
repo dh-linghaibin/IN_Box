@@ -4,13 +4,17 @@
 #include "Currentsampl.h"
 #include "Delay.h"
 #include "Bluetooth.h"
+#include "Eeprom.h"
 /*!
  @method     
  @abstract   
  @discussion 
  @param   
  */
+static u16 current_erroe[5] = {0,0,0,0,0};
+
 void CurrentsamplInit(void) {
+    u8 read_i = 0;
     PB_DDR = 0x00;
     PB_CR1 = 0x00;
     PB_CR2 = 0x00;
@@ -43,6 +47,40 @@ void CurrentsamplInit(void) {
     
     PE_ODR_ODR2 = 0;
     PC_ODR_ODR7 = 0;
+    if(EepromRead(150) != 0x55) {
+        EepromWrite(150,0x55);                 
+        for(read_i = 0; read_i < 4; read_i++) {
+            current_erroe[read_i] = 
+                CurrentsamplGetAd(CurrentFinishingchannel(read_i));
+            EepromWrite(151+(read_i*2),(u8)(current_erroe[read_i]));
+            EepromWrite(152+(read_i*2),(u8)(current_erroe[read_i] >> 8));
+        }
+    }
+    for(read_i = 0; read_i < 4; read_i++) {
+        current_erroe[read_i] = EepromRead(151+(read_i*2));
+        current_erroe[read_i] |= (EepromRead(152+(read_i*2)) << 8);
+    }
+}
+u8 CurrentFinishingchannel(u8 channel) {
+    switch(channel) {
+        case 0:
+            return ADD_HAT1;
+        break;
+        case 1:
+            return ADD_HAT2;
+        break;
+        case 2:
+            return ADD_HAT3;
+        break;
+        case 3:
+            return ADD_HAT4;
+        break;
+        case 4:
+            return ADD_HAT5;
+        break;
+        default:break;
+    }
+    return 0;
 }
 /*!
  @method     
@@ -66,7 +104,7 @@ u16 CurrentsamplGetAd(u8 passage) {
     u8 ad_l = 0;
 	ADC_CSR = passage;
 	ADC_CR1 = 0x01;
-	DelayUs(20);
+	DelayUs(40);
 	ADC_CR1 = ADC_CR1 | 0x01; 
 	while((ADC_CSR & 0x80) == 0); 
     ad_h = ADC_DRH;
@@ -80,11 +118,40 @@ u16 CurrentsamplGetAd(u8 passage) {
  @discussion 
  @param   
  */
+u16 xx[5] = 0;
 float CurrentsamplGetCurrent(u8 passage) {
     float current = 0;
     u16 ad_value = 0;
-	ad_value = CurrentsamplGetAd(passage);
-    current = ((5.91870967741*ad_value)/65535); //(1/1.55)*3.3*2.87
+    u16 ad_last = 0;
+    u8 change = 0;
+    switch(passage) {
+        case ADD_HAT1:
+            change = 0;
+        break;
+        case ADD_HAT2:
+            change = 1;
+        break;
+        case ADD_HAT3:
+            change = 2;
+        break;
+        case ADD_HAT4:
+            change = 3;
+        break;
+        case ADD_HAT5:
+            change = 4;
+        break;
+        default:break;
+    }
+    ad_last = CurrentsamplGetAd(passage);
+    if(ad_last > current_erroe[change]) {
+        ad_value = (u16)(ad_last - current_erroe[change]);//count error
+        xx[change] = ad_value;
+    }
+    if(ad_value > 1000) {
+        current = ((5.91870967741*ad_value)/65535); //(1/1.55)*3.3*2.87
+    } else {
+        current = 0;
+    }
     if(current < 0) {
         current = 0;
     }
@@ -111,7 +178,7 @@ float CurrentsamplGetVoltage(u8 passage) {
 void CurrentsamplCheckAsk(u8 num, float current) {
     static u8 ask[5] = {0,0,0,0,0};
     if(current > 0.005) {
-        ask[num] = (u8)(current*100);
+        ask[num] = (u8)(current*10);
     } else {
         ask[num] = 0;
     }

@@ -17,6 +17,6 @@ u8 ModeGetPwm(u8 num);
 void ModeAllShutdown(void);
 void ModeAllOpen(void);
 void ModeSetOut(u8 num,u8 data);
-
+void ModeSetPwm(u8 num, u8 cmd);
 
 #endif

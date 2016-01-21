@@ -1,6 +1,6 @@
 
 #include "Usbout.h"
-
+#include "Mode.h"
 /*!
  @method     
  @abstract   
@@ -26,12 +26,14 @@ void UsboutInit(void) {
     
     PA_DDR_DDR3= 1;
     PA_CR1_C13 = 1;
-    PA_CR2_C23 = 0;//1
+    PA_CR2_C23 = 1;//1
 }
 
 void UsboutSet(u8 chx,u8 data) {
+    ModeSetPwm(chx, data);
 	if(chx == 0x00) {
 		TIM1_CCR1L = data; 
+        
 	}
 	if(chx == 0x01) {
 		TIM1_CCR2L = data;  
@@ -43,7 +45,7 @@ void UsboutSet(u8 chx,u8 data) {
 		TIM1_CCR4L = data; 
 	}
 	if(chx == 0x04) {
-		TIM2_CCR3L = data;      
+		TIM2_CCR3L = data;  //2016/1/21   
 	}
 }
     

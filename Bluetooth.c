@@ -5,6 +5,7 @@
  @copyright  版权
  */
 #include "Bluetooth.h"
+#include "Delay.h"
 /*!
  @method     
  @abstract   
@@ -37,7 +38,7 @@ void BluetoothInit(void) {
     UART2_BRR1=0x08;//68 08
     UART2_CR2=0x2c;//允许接收，发送，开接收中断
     BLUE_EN = 0;
-    BluetoothSendSrt("TTM:RENPowearIN");
+    BluetoothSendSrt("TTM:REN-PowearIN");
 }
 
 void BluetoothSetEn(u8 cmd) {
@@ -94,11 +95,10 @@ void BluetoothSend(u8 cmd,
 	}
 	data_txd[10] = jy_data;
 	data_txd[11] = jy_data >> 8;
-    
+    DelayMs(50);
 	for(count_i = 0;count_i < 13;count_i++)
 	{
-        while((UART2_SR & 0x80) == 0x00);    // 等待数据的传送  
-        UART2_DR = data_txd[count_i]; 
+       blue_send(data_txd[count_i]);
 	}
 }
 /*!

@@ -36,7 +36,7 @@ ActionState=1
 Enabled=0
 ShowSource=1
 [DebugChecksum]
-Checksum=513663131
+Checksum=1163075557
 [CallStack]
 ShowArgs=0
 [Disassembly]
@@ -62,9 +62,8 @@ Category=_ 0
 LoggingEnabled=_ 0
 LogFile=_ ""
 [Breakpoints]
-Bp0=_ "STD_CODE" "{$PROJ_DIR$\Currentsampl.c}.124.5" 1 0 0 0 "" 0 ""
-Bp1=_ "STD_DATA" "BluetoothInit" 1 0 0 3 0 "" 0 ""
-Count=2
+Bp0=_ "STD_DATA" "BluetoothInit" 1 0 0 3 0 "" 0 ""
+Count=1
 [Aliases]
 Count=0
 SuppressDialog=0
