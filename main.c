@@ -57,7 +57,7 @@ int main(void) {
             }
             //电池电压检测
             if(CurrentsamplGetVoltage(BAT_VOLTAGE) < 3.6) {
-                //ModeAllShutdown();//sleep
+                ModeAllShutdown();//sleep
             }
             //更新电量
             ComSendCmdWatch(0x04,PowerCountBlank(0),PowerCountBlank(1),0,0);
@@ -203,9 +203,9 @@ int main(void) {
                     case 0x11://设备设置与状态
                         for(read_i = 2; read_i < 7; read_i++) {
                             if(BluetoothGetDataRx(read_i) == 1) {
-                                UsboutSet(read_i-2, 0x00);
+                                ModeSetOut(read_i-2, 0x00);
                             } else if(BluetoothGetDataRx(read_i) == 0){
-                                UsboutSet(read_i-2, 0xff);
+                                ModeSetOut(read_i-2, 0xff);
                             }
                         }   
                     break;  

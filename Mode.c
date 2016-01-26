@@ -12,7 +12,7 @@
 static u8 mode_mode_flag = 0;
 static u8 mode_devic_flag[4] = {0,0,0,0};
 static u8 mode_led_flag[4] = {0,0,0,0};
-static u8 mode_photo_flag[4] = {0,0,0,0};
+static u8 mode_photo_flag[4] = {1,2,3,4};
 
 static u8 mode_out_pwm[5] = {0,0,0,0,0};
 static u8 mode_led_rgb[24] = {
@@ -40,7 +40,7 @@ void ModeInit(void) {
             mode_led_flag[read_i] = EepromRead(16+read_i);
         }
         for(read_i = 0;read_i < 4;read_i++) {
-            mode_photo_flag[read_i] = EepromRead(20+read_i);
+            mode_photo_flag[read_i] = EepromRead(20+read_i); 
         }
         for(read_i = 0;read_i < 5;read_i++) {
             mode_out_pwm[read_i] = EepromRead(25+read_i);
@@ -51,15 +51,14 @@ void ModeInit(void) {
         mode_rgb_mode = EepromRead(54);
         mode_reg_flag = EepromRead(55);
         for(read_i = 0;read_i < 5;read_i++) {
-            /*
             UsboutSet(read_i,mode_out_pwm[read_i]);
             if(mode_out_pwm[read_i] > 0x00) {
                 out_bit &= ~BIT(read_i);
             } else {
                 out_bit |= BIT(read_i);
-            }*/
-            mode_out_pwm[read_i] = 0xff;
-            UsboutSet(read_i,0xff); //Test Use
+            }
+            //mode_out_pwm[read_i] = 0xff;
+            //UsboutSet(read_i,0xff); //Test Use
         }
     } else {
         EepromWrite(10,0x55);
@@ -361,10 +360,15 @@ void ModeAllShutdown(void) {
 }
 
 void ModeAllOpen(void) {
+    u8 read_i = 0;
     PB_CR2_C23 = 0; //close int
     BluetoothSetEn(0);//open blue
     CurrentSetEn(0, 0);//open check
     PromptSetEn(0);//open
+    for(read_i = 0;read_i < 5;read_i++) {
+        UsboutSet(read_i,mode_out_pwm[read_i]);
+    }
+    ComSendCmdWatch(0x88,0,0,0,0);
 }
 
 void ModeSetOut(u8 num,u8 data) {

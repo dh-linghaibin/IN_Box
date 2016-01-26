@@ -30,10 +30,9 @@ void UsboutInit(void) {
 }
 
 void UsboutSet(u8 chx,u8 data) {
-    ModeSetPwm(chx, data);
+    //ModeSetPwm(chx, data);
 	if(chx == 0x00) {
 		TIM1_CCR1L = data; 
-        
 	}
 	if(chx == 0x01) {
 		TIM1_CCR2L = data;  

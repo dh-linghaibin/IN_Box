@@ -38,7 +38,7 @@ void BluetoothInit(void) {
     UART2_BRR1=0x08;//68 08
     UART2_CR2=0x2c;//允许接收，发送，开接收中断
     BLUE_EN = 0;
-    BluetoothSendSrt("TTM:REN-PowearIN");
+    //BluetoothSendSrt("TTM:REN-PowearIN");
 }
 
 void BluetoothSetEn(u8 cmd) {
