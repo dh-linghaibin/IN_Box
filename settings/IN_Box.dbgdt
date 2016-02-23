@@ -58,7 +58,7 @@
           
           
           
-        <item>blue_rx_data</item><item>power_en_bit</item><item>mode_out_pwm</item><item></item></expressions>
+        <item>blue_rx_data</item><item>power_en_bit</item><item>mode_out_pwm</item><item/></expressions>
         <col-names>
           
           

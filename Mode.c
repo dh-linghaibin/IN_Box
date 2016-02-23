@@ -343,8 +343,11 @@ void ModeSetPwm(u8 num, u8 cmd) {
     mode_out_pwm[num] = cmd;
 }
 
+static u8 sleep_bit = 0;
+
 void ModeAllShutdown(void) {
     u8 set_i = 0;
+    sleep_bit = 1;
     for(set_i = 0;set_i < 5;set_i++) {
         UsboutSet(set_i,0x00); //Test Use
     }
@@ -360,15 +363,19 @@ void ModeAllShutdown(void) {
 }
 
 void ModeAllOpen(void) {
-    u8 read_i = 0;
-    PB_CR2_C23 = 0; //close int
-    BluetoothSetEn(0);//open blue
-    CurrentSetEn(0, 0);//open check
-    PromptSetEn(0);//open
-    for(read_i = 0;read_i < 5;read_i++) {
-        UsboutSet(read_i,mode_out_pwm[read_i]);
+    if(sleep_bit == 1) {
+        sleep_bit = 0;
+        u8 read_i = 0;
+        PB_CR2_C23 = 0; //close int
+        BluetoothSetEn(0);//open blue
+        CurrentSetEn(0, 0);//open check
+        PromptSetEn(0);//open
+        for(read_i = 0;read_i < 5;read_i++) {
+            UsboutSet(read_i,mode_out_pwm[read_i]);
+        }
+        ComSendCmdWatch(0x88,0,0,0,0);
+        BluetoothSendSrt("TTM:RST-SYSTEMRESET");
     }
-    ComSendCmdWatch(0x88,0,0,0,0);
 }
 
 void ModeSetOut(u8 num,u8 data) {
